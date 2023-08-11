@@ -5,6 +5,11 @@ agent any
     buildDiscarder(logRotator(numToKeepStr: '5'))
   }
   stages {
+      stage('SonarQube analysis 1') {
+            steps {
+                sh 'mvn clean package sonar:sonar'
+            }
+        }
     stage('Scan') {
       steps {
         withSonarQubeEnv(installationName: 'sq1') { 
